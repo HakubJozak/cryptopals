@@ -26,5 +26,8 @@ end
 
 
 bytes = hex2bytes(source)
-puts bytes2base64(bytes)
+result = bytes2base64(bytes)
+
+puts result
+puts 'YAY!' if result == target
 
