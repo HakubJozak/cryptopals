@@ -3,6 +3,7 @@ module English
   FREQUENCY_TABLE =   {
     ' ' =>      5,
     '*' =>      -1,
+    '\\' =>     -5,    
     'E' =>	12.02,
     'T' =>	9.10,
     'A' =>	8.12,
