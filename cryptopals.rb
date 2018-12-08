@@ -9,7 +9,7 @@ module Cryptopals
 
   def xor_hexes(a,b)
     c = (hex2bytes(a).zip(hex2bytes(b))).map { |x,y| x ^ y }
-    c.pack('C*').unpack('H*').first
+     c.pack('C*').unpack('H*').first
   end
 
   def bytest2binary(bytes)
