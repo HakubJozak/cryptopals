@@ -28,36 +28,32 @@ secret = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 
 def xor(a,b)
   c = (hex2bytes(a).zip(hex2bytes(b))).map { |x,y| x ^ y }
-  require 'pry' ; binding.pry
   c.pack('C*')
 end
 
-outs = [ ('a'..'z').to_a, ('A'..'Z').to_a ].flatten.map do |letter|
-  password = letter * secret.size 
-  
-  hexed = xor_hexes(secret, password)
-  text  = hex2bytes(hexed).pack('C*')
+outs = ('A'..'Z').to_a.map do |letter|
+  #letter = [ char ].pack('C')
 
+  password = letter * secret.size
+  key = (letter * 34).unpack('H*').first
+
+  hexed = xor_hexes(secret, key)
+  text  = hex2bytes(hexed).pack('C*')
+  s = score2(text)
   # text = hex2bytes(hexed).pack('C*')
 
-  [ letter, score(text), text, hexed ]
+    puts "#{letter} / #{s}: #{text}"
+
+
+  [ letter, s, text, hexed ]
 end
 
-
-
-puts outs
 
 password, score, text, hexed = outs.max { |a,b| a[1] <=> b[1] }
 
 
+puts '------------------------------------'
 puts "Key: #{password}"
 puts "Score: #{score}"
 puts hexed
 puts text
-
-
-
-
-
-
-
